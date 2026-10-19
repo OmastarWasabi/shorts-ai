@@ -42,9 +42,9 @@ func enterProject(t *testing.T, count int) {
 		}
 	})
 	t.Setenv("OPENAI_API_KEY", "test-key")
-	t.Setenv("OPENAI_IMAGE_MODEL", "")
+	t.Setenv("OPENAI_IMAGE_MODEL", "gpt-image-1-mini")
 	t.Setenv("OPENAI_IMAGE_SIZE", "")
-	t.Setenv("OPENAI_IMAGE_QUALITY", "")
+	t.Setenv("OPENAI_IMAGE_QUALITY", "medium")
 	var prompts strings.Builder
 	for number := 1; number <= count; number++ {
 		fmt.Fprintf(&prompts, "[%02d]\n%d\n\n", number, number)
