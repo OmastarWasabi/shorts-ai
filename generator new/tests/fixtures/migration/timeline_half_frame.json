@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "audio_sha256": "6fa1f7747fb401ec9cd2ae7bb539b41b3f0939950eddcdad3e6e8b57f52362ce",
+  "duration": 1.2,
+  "scenes": [
+    {
+      "number": 1,
+      "text": "Ёжик спит.",
+      "start": 0.0,
+      "end": 0.35
+    },
+    {
+      "number": 2,
+      "text": "Ёжик проснулся.",
+      "start": 0.35,
+      "end": 1.2
+    }
+  ],
+  "words": [
+    {
+      "text": "Ёжик",
+      "start": 0.02,
+      "end": 0.1,
+      "scene": 1
+    },
+    {
+      "text": "спит.",
+      "start": 0.15,
+      "end": 0.25,
+      "scene": 1
+    },
+    {
+      "text": "Ёжик",
+      "start": 0.35,
+      "end": 0.6,
+      "scene": 2
+    },
+    {
+      "text": "проснулся.",
+      "start": 0.65,
+      "end": 1.1,
+      "scene": 2
+    }
+  ]
+}

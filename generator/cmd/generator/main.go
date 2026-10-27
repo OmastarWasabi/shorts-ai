@@ -20,14 +20,15 @@ type FileGenerator interface {
 
 func main() {
 	if len(os.Args) != 1 {
-		fmt.Fprintln(os.Stderr, "Запускайте программу без аргументов из папки с story.txt и prompts.txt")
+		fmt.Fprintln(os.Stderr, "Запускайте программу без аргументов из папки generator; генерации выбираются в .env")
 		os.Exit(1)
 	}
 	if err := loadEnv(".env"); err != nil {
 		fmt.Fprintln(os.Stderr, "Ошибка:", err)
 		os.Exit(1)
 	}
-	if err := validateInputs(); err != nil {
+	cfg, err := readConfig()
+	if err != nil {
 		fmt.Fprintln(os.Stderr, "Ошибка:", err)
 		os.Exit(1)
 	}
@@ -42,20 +43,47 @@ func main() {
 		},
 	}
 
-	generators := []FileGenerator{
-		fish.Generator{},
-		gpt.Generator{},
-	}
-	if err := runGenerators(ctx, client, generators); err != nil {
+	if err := runGeneration(ctx, client, cfg); err != nil {
 		fmt.Fprintln(os.Stderr, "Ошибка:", err)
 		os.Exit(1)
 	}
-	fmt.Println("Готово: voice.mp3 и изображения в images/")
+	switch {
+	case cfg.GenerateVoice && cfg.GenerateImages:
+		fmt.Println("Готово: voice.mp3 и изображения в images/")
+	case cfg.GenerateVoice:
+		fmt.Println("Готово: voice.mp3")
+	case cfg.GenerateImages:
+		fmt.Println("Готово: изображения в images/")
+	default:
+		fmt.Println("Все генерации отключены; запросы не выполнялись.")
+	}
 }
 
-func validateInputs() error {
-	_, storyErr := fish.ReadText("story.txt")
-	_, promptsErr := gpt.ReadPrompts("prompts.txt")
+func runGeneration(ctx context.Context, client *http.Client, cfg config) error {
+	if err := validateInputs(cfg); err != nil {
+		return err
+	}
+	var generators []FileGenerator
+	if cfg.GenerateVoice {
+		generators = append(generators, fish.Generator{})
+	}
+	if cfg.GenerateImages {
+		generators = append(generators, gpt.Generator{})
+	}
+	if len(generators) == 0 {
+		return nil
+	}
+	return runGenerators(ctx, client, generators)
+}
+
+func validateInputs(cfg config) error {
+	var storyErr, promptsErr error
+	if cfg.GenerateVoice {
+		_, storyErr = fish.ReadText("story.txt")
+	}
+	if cfg.GenerateImages {
+		_, promptsErr = gpt.ReadPrompts("prompts.txt")
+	}
 	return errors.Join(storyErr, promptsErr)
 }
 
