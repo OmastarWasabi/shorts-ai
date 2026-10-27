@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "language": "ru",
+  "scenes": [
+    {
+      "number": 1,
+      "text": "Ёжик спит."
+    },
+    {
+      "number": 2,
+      "text": "Ёжик проснулся."
+    }
+  ]
+}

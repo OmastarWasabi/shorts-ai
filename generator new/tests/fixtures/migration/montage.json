@@ -1,0 +1,297 @@
+{
+  "splits": [
+    {
+      "duration": 1.01,
+      "scenes": 3,
+      "frames": [
+        11,
+        10,
+        10
+      ]
+    },
+    {
+      "duration": 1.2,
+      "scenes": 6,
+      "frames": [
+        6,
+        6,
+        6,
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "duration": 0.01,
+      "scenes": 1,
+      "frames": [
+        1
+      ]
+    },
+    {
+      "duration": 35.76156,
+      "scenes": 10,
+      "frames": [
+        108,
+        108,
+        108,
+        107,
+        107,
+        107,
+        107,
+        107,
+        107,
+        107
+      ]
+    },
+    {
+      "duration": 0.35,
+      "scenes": 1,
+      "frames": [
+        11
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "frames": 1,
+      "index": 0,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1+0.12*on/1':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=1:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1,
+      "index": 1,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*on/1':y='ih/2-ih/zoom/2':d=1:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1,
+      "index": 2,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12-0.12*on/1':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=1:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1,
+      "index": 3,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*(1-on/1)':y='ih/2-ih/zoom/2':d=1:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1,
+      "index": 4,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*(1-on/1)':d=1:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1,
+      "index": 5,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*on/1':d=1:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1,
+      "index": 6,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1+0.12*on/1':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=1:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1,
+      "index": 7,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*on/1':y='ih/2-ih/zoom/2':d=1:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1,
+      "index": 8,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12-0.12*on/1':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=1:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1,
+      "index": 9,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*(1-on/1)':y='ih/2-ih/zoom/2':d=1:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1,
+      "index": 10,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*(1-on/1)':d=1:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1,
+      "index": 11,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*on/1':d=1:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 6,
+      "index": 0,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1+0.12*on/5':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=6:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 6,
+      "index": 1,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*on/5':y='ih/2-ih/zoom/2':d=6:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 6,
+      "index": 2,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12-0.12*on/5':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=6:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 6,
+      "index": 3,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*(1-on/5)':y='ih/2-ih/zoom/2':d=6:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 6,
+      "index": 4,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*(1-on/5)':d=6:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 6,
+      "index": 5,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*on/5':d=6:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 6,
+      "index": 6,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1+0.12*on/5':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=6:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 6,
+      "index": 7,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*on/5':y='ih/2-ih/zoom/2':d=6:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 6,
+      "index": 8,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12-0.12*on/5':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=6:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 6,
+      "index": 9,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*(1-on/5)':y='ih/2-ih/zoom/2':d=6:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 6,
+      "index": 10,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*(1-on/5)':d=6:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 6,
+      "index": 11,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*on/5':d=6:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 30,
+      "index": 0,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1+0.12*on/29':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=30:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 30,
+      "index": 1,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*on/29':y='ih/2-ih/zoom/2':d=30:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 30,
+      "index": 2,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12-0.12*on/29':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=30:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 30,
+      "index": 3,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*(1-on/29)':y='ih/2-ih/zoom/2':d=30:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 30,
+      "index": 4,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*(1-on/29)':d=30:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 30,
+      "index": 5,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*on/29':d=30:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 30,
+      "index": 6,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1+0.12*on/29':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=30:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 30,
+      "index": 7,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*on/29':y='ih/2-ih/zoom/2':d=30:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 30,
+      "index": 8,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12-0.12*on/29':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=30:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 30,
+      "index": 9,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*(1-on/29)':y='ih/2-ih/zoom/2':d=30:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 30,
+      "index": 10,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*(1-on/29)':d=30:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 30,
+      "index": 11,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*on/29':d=30:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1073,
+      "index": 0,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1+0.12*on/1072':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=1073:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1073,
+      "index": 1,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*on/1072':y='ih/2-ih/zoom/2':d=1073:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1073,
+      "index": 2,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12-0.12*on/1072':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=1073:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1073,
+      "index": 3,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*(1-on/1072)':y='ih/2-ih/zoom/2':d=1073:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1073,
+      "index": 4,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*(1-on/1072)':d=1073:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1073,
+      "index": 5,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*on/1072':d=1073:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1073,
+      "index": 6,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1+0.12*on/1072':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=1073:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1073,
+      "index": 7,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*on/1072':y='ih/2-ih/zoom/2':d=1073:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1073,
+      "index": 8,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12-0.12*on/1072':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=1073:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1073,
+      "index": 9,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='(iw-iw/zoom)*(1-on/1072)':y='ih/2-ih/zoom/2':d=1073:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1073,
+      "index": 10,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*(1-on/1072)':d=1073:s=1080x1920:fps=30,format=yuv420p"
+    },
+    {
+      "frames": 1073,
+      "index": 11,
+      "filter": "scale=2160:3840:force_original_aspect_ratio=increase:flags=lanczos,crop=2160:3840,setsar=1,zoompan=z='1.12':x='iw/2-iw/zoom/2':y='(ih-ih/zoom)*on/1072':d=1073:s=1080x1920:fps=30,format=yuv420p"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "audio_text": "migration-baseline-audio\n",
+  "texts": [
+    {"name": "plain_russian", "content": "Ёжик спит.\nЁжик проснулся.", "expected": "Ёжик спит.\nЁжик проснулся."},
+    {"name": "bom_crlf_and_spaces", "content": "\ufeff  Ёжик спит.\r\nЁжик проснулся.\r\n", "expected": "  Ёжик спит.\r\nЁжик проснулся.\r\n"},
+    {"name": "no_scene_markers_needed", "content": "Обычный текст без номеров.", "expected": "Обычный текст без номеров."},
+    {"name": "empty", "content": "\ufeff \n\t", "error_contains": "пустым"},
+    {"name": "invalid_utf8", "hex": "d0ff", "error_contains": "UTF-8"}
+  ],
+  "prompts": [
+    {"name": "russian_bom_crlf", "content": "\ufeff\r\n [01] \r\nЁжик спит в лесу.\r\n\r\nВертикальная композиция.\r\n[02]\r\nЁжик проснулся.\r\n", "expected": [{"number": 1, "text": "Ёжик спит в лесу.\n\nВертикальная композиция."}, {"number": 2, "text": "Ёжик проснулся."}]},
+    {"name": "leading_zeroes", "content": "[001]\nПервый кадр.\n[002]\nВторой кадр.", "expected": [{"number": 1, "text": "Первый кадр."}, {"number": 2, "text": "Второй кадр."}]},
+    {"name": "ordinary_bracket_text", "content": "[01]\n[Примечание] Ёжик в лесу.", "expected": [{"number": 1, "text": "[Примечание] Ёжик в лесу."}]},
+    {"name": "missing_marker", "content": "Ёжик в лесу.", "error_contains": "начинаться"},
+    {"name": "duplicate", "content": "[01]\nПервый.\n[01]\nПовтор.", "error_contains": "ожидался маркер [02]"},
+    {"name": "gap", "content": "[01]\nПервый.\n[03]\nТретий.", "error_contains": "ожидался маркер [02]"},
+    {"name": "empty_block", "content": "[01]\n\n[02]\nВторой.", "error_contains": "пуст"},
+    {"name": "short_marker", "content": "[1]\nПервый.", "error_contains": "неверный маркер"},
+    {"name": "inline_marker", "content": "[01]\nПервый.\n[02] Второй.", "error_contains": "неверный маркер"}
+  ],
+  "booleans": [
+    {"input": "1", "expected": true},
+    {"input": "t", "expected": true},
+    {"input": "T", "expected": true},
+    {"input": "true", "expected": true},
+    {"input": "TRUE", "expected": true},
+    {"input": "True", "expected": true},
+    {"input": "  true\t", "expected": true},
+    {"input": "0", "expected": false},
+    {"input": "f", "expected": false},
+    {"input": "F", "expected": false},
+    {"input": "false", "expected": false},
+    {"input": "FALSE", "expected": false},
+    {"input": "False", "expected": false},
+    {"input": "\r\nfalse ", "expected": false},
+    {"input": "", "error_contains": "true или false"},
+    {"input": "TrUe", "error_contains": "true или false"},
+    {"input": "yes", "error_contains": "true или false"}
+  ],
+  "env": [
+    {"name": "quoted_equals", "content": "# Example\nMIGRATION_BASELINE_VALUE = \"value=with=equals\"\n", "expected": "value=with=equals"},
+    {"name": "single_quotes", "content": "MIGRATION_BASELINE_VALUE='русский текст'\n", "expected": "русский текст"},
+    {"name": "existing_empty_wins", "content": "MIGRATION_BASELINE_VALUE=from-file\n", "initial": "", "expected": ""},
+    {"name": "first_duplicate_wins", "content": "MIGRATION_BASELINE_VALUE=first\nMIGRATION_BASELINE_VALUE=second\n", "expected": "first"},
+    {"name": "inline_comment_is_literal", "content": "MIGRATION_BASELINE_VALUE=true # comment\n", "expected": "true # comment"},
+    {"name": "no_variable_expansion", "content": "MIGRATION_BASELINE_VALUE=${MIGRATION_BASELINE_OTHER}\n", "expected": "${MIGRATION_BASELINE_OTHER}"},
+    {"name": "unclosed_quotes", "content": "MIGRATION_BASELINE_VALUE=\"do-not-print-this\n", "error_contains": "незакрытые кавычки"},
+    {"name": "invalid_name", "content": "BAD KEY=do-not-print-this\n", "error_contains": "неверный формат"}
+  ],
+  "timelines": [
+    {"file": "timeline_valid.json", "duration": 4.0, "scene_count": 2, "expected_frames": [66, 54]},
+    {"file": "timeline_half_frame.json", "duration": 1.2, "scene_count": 2, "expected_frames": [11, 25]},
+    {"file": "timeline_gap.json", "duration": 4.0, "scene_count": 2, "error_contains": "границы"},
+    {"file": "timeline_word_outside.json", "duration": 4.0, "scene_count": 2, "error_contains": "выходит за границы"},
+    {"file": "timeline_unknown_field.json", "duration": 4.0, "scene_count": 2, "error_contains": "unknown field"},
+    {"file": "timeline_stale_audio.json", "duration": 4.0, "scene_count": 2, "error_contains": "другой озвучке"}
+  ],
+  "centiseconds": [
+    {"seconds": 0.125, "expected": 13},
+    {"seconds": 0.625, "expected": 63},
+    {"seconds": 59.999, "expected": 6000}
+  ]
+}

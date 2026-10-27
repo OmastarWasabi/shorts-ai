@@ -1,0 +1,193 @@
+[
+  {
+    "name": "pause_and_escape",
+    "words": [
+      {
+        "text": "Один",
+        "start": 0.1,
+        "end": 0.3,
+        "scene": 1
+      },
+      {
+        "text": "{\\pos(0,0)}два",
+        "start": 0.6,
+        "end": 0.8,
+        "scene": 1
+      }
+    ],
+    "expected": "[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Narration,Arial,68,\u0026H0000D7FF,\u0026H00FFFFFF,\u0026H00000000,\u0026H80000000,-1,0,0,0,100,100,0,0,1,4,1,2,100,100,280,1\n\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\nDialogue: 0,0:00:00.10,0:00:00.80,Narration,,0,0,0,,{\\k50}Один {\\k20}｛＼pos(0,0)｝два\n"
+  },
+  {
+    "name": "four_words",
+    "words": [
+      {
+        "text": "Раз",
+        "start": 0,
+        "end": 0.15,
+        "scene": 1
+      },
+      {
+        "text": "два",
+        "start": 0.2,
+        "end": 0.35,
+        "scene": 1
+      },
+      {
+        "text": "три",
+        "start": 0.4,
+        "end": 0.55,
+        "scene": 1
+      },
+      {
+        "text": "четыре",
+        "start": 0.6000000000000001,
+        "end": 0.7500000000000001,
+        "scene": 1
+      },
+      {
+        "text": "пять",
+        "start": 0.8,
+        "end": 0.9500000000000001,
+        "scene": 1
+      }
+    ],
+    "expected": "[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Narration,Arial,68,\u0026H0000D7FF,\u0026H00FFFFFF,\u0026H00000000,\u0026H80000000,-1,0,0,0,100,100,0,0,1,4,1,2,100,100,280,1\n\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\nDialogue: 0,0:00:00.00,0:00:00.75,Narration,,0,0,0,,{\\k20}Раз {\\k20}два {\\k20}три {\\k15}четыре\nDialogue: 0,0:00:00.80,0:00:00.95,Narration,,0,0,0,,{\\k15}пять\n"
+  },
+  {
+    "name": "unicode_limit",
+    "words": [
+      {
+        "text": "яяяяяяяяяяяяяя",
+        "start": 0,
+        "end": 0.2,
+        "scene": 1
+      },
+      {
+        "text": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+        "start": 0.3,
+        "end": 0.5,
+        "scene": 1
+      },
+      {
+        "text": "конец",
+        "start": 0.6,
+        "end": 0.8,
+        "scene": 1
+      }
+    ],
+    "expected": "[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Narration,Arial,68,\u0026H0000D7FF,\u0026H00FFFFFF,\u0026H00000000,\u0026H80000000,-1,0,0,0,100,100,0,0,1,4,1,2,100,100,280,1\n\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\nDialogue: 0,0:00:00.00,0:00:00.50,Narration,,0,0,0,,{\\k30}яяяяяяяяяяяяяя {\\k20}😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀\nDialogue: 0,0:00:00.60,0:00:00.80,Narration,,0,0,0,,{\\k20}конец\n"
+  },
+  {
+    "name": "limit_exceeded",
+    "words": [
+      {
+        "text": "яяяяяяяяяяяяяяя",
+        "start": 0,
+        "end": 0.2,
+        "scene": 1
+      },
+      {
+        "text": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+        "start": 0.3,
+        "end": 0.5,
+        "scene": 1
+      }
+    ],
+    "expected": "[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Narration,Arial,68,\u0026H0000D7FF,\u0026H00FFFFFF,\u0026H00000000,\u0026H80000000,-1,0,0,0,100,100,0,0,1,4,1,2,100,100,280,1\n\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\nDialogue: 0,0:00:00.00,0:00:00.20,Narration,,0,0,0,,{\\k20}яяяяяяяяяяяяяяя\nDialogue: 0,0:00:00.30,0:00:00.50,Narration,,0,0,0,,{\\k20}😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀\n"
+  },
+  {
+    "name": "long_pause",
+    "words": [
+      {
+        "text": "Речь",
+        "start": 0,
+        "end": 0.2,
+        "scene": 1
+      },
+      {
+        "text": "после",
+        "start": 0.601,
+        "end": 0.8,
+        "scene": 1
+      }
+    ],
+    "expected": "[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Narration,Arial,68,\u0026H0000D7FF,\u0026H00FFFFFF,\u0026H00000000,\u0026H80000000,-1,0,0,0,100,100,0,0,1,4,1,2,100,100,280,1\n\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\nDialogue: 0,0:00:00.00,0:00:00.20,Narration,,0,0,0,,{\\k20}Речь\nDialogue: 0,0:00:00.60,0:00:00.80,Narration,,0,0,0,,{\\k20}после\n"
+  },
+  {
+    "name": "scene_change",
+    "words": [
+      {
+        "text": "Речь",
+        "start": 0,
+        "end": 0.2,
+        "scene": 1
+      },
+      {
+        "text": "дальше",
+        "start": 0.3,
+        "end": 0.6,
+        "scene": 2
+      }
+    ],
+    "expected": "[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Narration,Arial,68,\u0026H0000D7FF,\u0026H00FFFFFF,\u0026H00000000,\u0026H80000000,-1,0,0,0,100,100,0,0,1,4,1,2,100,100,280,1\n\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\nDialogue: 0,0:00:00.00,0:00:00.20,Narration,,0,0,0,,{\\k20}Речь\nDialogue: 0,0:00:00.30,0:00:00.60,Narration,,0,0,0,,{\\k30}дальше\n"
+  },
+  {
+    "name": "punctuation",
+    "words": [
+      {
+        "text": "Раз.",
+        "start": 0,
+        "end": 0.15,
+        "scene": 1
+      },
+      {
+        "text": "Два!",
+        "start": 0.2,
+        "end": 0.35,
+        "scene": 1
+      },
+      {
+        "text": "Три?",
+        "start": 0.4,
+        "end": 0.55,
+        "scene": 1
+      },
+      {
+        "text": "Ещё",
+        "start": 0.6000000000000001,
+        "end": 0.7500000000000001,
+        "scene": 1
+      },
+      {
+        "text": "слово",
+        "start": 0.8,
+        "end": 0.9500000000000001,
+        "scene": 1
+      }
+    ],
+    "expected": "[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Narration,Arial,68,\u0026H0000D7FF,\u0026H00FFFFFF,\u0026H00000000,\u0026H80000000,-1,0,0,0,100,100,0,0,1,4,1,2,100,100,280,1\n\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\nDialogue: 0,0:00:00.00,0:00:00.15,Narration,,0,0,0,,{\\k15}Раз.\nDialogue: 0,0:00:00.20,0:00:00.35,Narration,,0,0,0,,{\\k15}Два!\nDialogue: 0,0:00:00.40,0:00:00.55,Narration,,0,0,0,,{\\k15}Три?\nDialogue: 0,0:00:00.60,0:00:00.95,Narration,,0,0,0,,{\\k20}Ещё {\\k15}слово\n"
+  },
+  {
+    "name": "rounding_and_newlines",
+    "words": [
+      {
+        "text": "первая\nстрока\rи вторая",
+        "start": 0.125,
+        "end": 0.625,
+        "scene": 1
+      },
+      {
+        "text": "Коротко",
+        "start": 1.001,
+        "end": 1.002,
+        "scene": 1
+      }
+    ],
+    "expected": "[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Narration,Arial,68,\u0026H0000D7FF,\u0026H00FFFFFF,\u0026H00000000,\u0026H80000000,-1,0,0,0,100,100,0,0,1,4,1,2,100,100,280,1\n\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\nDialogue: 0,0:00:00.13,0:00:01.00,Narration,,0,0,0,,{\\k87}первая строка и вторая {\\k1}Коротко\n"
+  },
+  {
+    "name": "empty",
+    "words": [],
+    "expected": "[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\n[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\nStyle: Narration,Arial,68,\u0026H0000D7FF,\u0026H00FFFFFF,\u0026H00000000,\u0026H80000000,-1,0,0,0,100,100,0,0,1,4,1,2,100,100,280,1\n\n[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
+  }
+]
