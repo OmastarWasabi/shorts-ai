@@ -120,15 +120,27 @@ def require_ass(binary: str) -> None:
         raise ValueError("Для субтитров нужен FFmpeg с libass; укажите FFMPEG_BIN или используйте --no-subtitles")
 
 
-def mux(binary: str, listing: Path, audio: Path, duration: float, output: Path, *, subtitles: bool = False) -> None:
+def mux(binary: str, listing: Path, audio: Path, duration: float, output: Path, *,
+        subtitles: bool = False, music: Path | None = None) -> None:
     video_args = ["-c:v", "copy"]
     if subtitles:
         # Имя внутри фильтра постоянно; пользовательские пути в ASS-синтаксис не попадают.
         video_args = ["-vf", "ass=filename=captions.ass", "-c:v", "libx264", "-preset", "medium",
                       "-crf", "18", "-threads", "2"]
+    music_args = []
+    audio_args = ["-map", "1:a:0"]
+    if music is not None:
+        fade = min(2.0, duration)
+        music_args = ["-stream_loop", "-1", "-i", str(music)]
+        audio_args = [
+            "-filter_complex_threads", "1", "-filter_complex",
+            f"[2:a:0]volume=0.1,afade=t=out:st={duration - fade:.6f}:d={fade:.6f}[music];"
+            "[1:a:0][music]amix=inputs=2:duration=first:normalize=0[mixed]",
+            "-map", "[mixed]",
+        ]
     ffmpeg(
         binary, "-f", "concat", "-safe", "1", "-i", str(listing), "-i", str(audio),
-        "-map", "0:v:0", "-map", "1:a:0", *video_args, "-c:a", "aac", "-b:a", "192k",
+        *music_args, "-map", "0:v:0", *audio_args, *video_args, "-c:a", "aac", "-b:a", "192k",
         "-t", f"{duration:.6f}", "-shortest", "-movflags", "+faststart", str(output),
         cwd=output.parent,
     )

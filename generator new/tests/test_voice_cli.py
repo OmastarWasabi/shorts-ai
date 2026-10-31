@@ -45,7 +45,8 @@ class VoiceCLITests(unittest.TestCase):
         for command in ("voice", "generate"):
             with self.subTest(command=command):
                 (self.directory / "voice.mp3").unlink(missing_ok=True)
-                code, output, errors = self.run_command(command)
+                arguments = (command, "--output-dir", str(self.directory)) if command == "generate" else (command,)
+                code, output, errors = self.run_command(*arguments)
                 self.assertEqual((code, errors), (0, ""))
                 self.assertIn("Готово:", output)
                 self.assertEqual((self.directory / "voice.mp3").read_bytes(), b"ID3test-audio")
@@ -68,10 +69,11 @@ class VoiceCLITests(unittest.TestCase):
     def test_missing_prompts_stop_generate_before_any_paid_request(self):
         for voice in ("true", "false"):
             with self.subTest(voice=voice):
-                code, output, errors = self.run_command("generate", env={"GENERATE_VOICE": voice, "GENERATE_IMAGES": "true"})
+                code, output, errors = self.run_command("generate", "--output-dir", str(self.directory),
+                                                       env={"GENERATE_VOICE": voice, "GENERATE_IMAGES": "true"})
                 self.assertEqual(code, 1)
                 self.assertIn("prompts.txt", errors)
-                self.assertEqual(output, "")
+                self.assertIn("Папка ролика:", output)
                 self.assertEqual(self.calls, [])
                 self.assertFalse((self.directory / "voice.mp3").exists())
 

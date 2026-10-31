@@ -7,7 +7,7 @@ import sys
 
 from . import __version__
 from .config import load_env, read_config
-from .files import project_directory, project_path
+from .files import create_run, current_run, project_directory, project_path
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -20,7 +20,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="каталог данных и .env (по умолчанию ./generator); указывается перед командой",
     )
     commands = parser.add_subparsers(dest="command", required=True)
-    commands.add_parser("generate", help="генерации, включённые в .env")
+    run = commands.add_parser("run", help="полный пайплайн: генерация, выравнивание и монтаж")
+    run.add_argument("--music", type=Path, help="фоновая музыка; путь от папки терминала")
+    generate = commands.add_parser("generate", help="генерации, включённые в .env")
+    generate.add_argument("--output-dir", type=Path, required=True,
+                          help="папка ролика; относительный путь от текущей папки терминала")
     voice = commands.add_parser("voice", help="только озвучка, независимо от флагов .env")
     voice.add_argument("--script", type=Path, default=Path("story.txt"))
     voice.add_argument("--output", type=Path, default=Path("voice.mp3"))
@@ -39,6 +43,7 @@ def build_parser() -> argparse.ArgumentParser:
     for name, default in (("images", "images"), ("audio", "voice.mp3"), ("output", "final.mp4")):
         montage.add_argument(f"--{name}", type=Path, default=Path(default))
     montage.add_argument("--timeline", type=Path)
+    montage.add_argument("--music", type=Path, help="фоновая музыка; путь от папки терминала")
     montage.add_argument("--no-subtitles", action="store_false", dest="subtitles", default=True)
     return parser
 
@@ -47,6 +52,14 @@ def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
         directory = project_directory(args.project_dir)
+        if args.command == "run":
+            load_env(directory / ".env")
+            from .pipeline import run_pipeline
+
+            output = run_pipeline(directory, read_config(),
+                                  music=args.music.expanduser().resolve() if args.music is not None else None)
+            print(f"Готовый ролик: {output}")
+            return 0
         if args.command in ("generate", "voice", "images"):
             load_env(directory / ".env")
             if args.command == "generate":
@@ -55,9 +68,11 @@ def main(argv: list[str] | None = None) -> int:
                     print("Все генерации отключены; запросы не выполнялись.")
                     return 0
                 from .generation import run_generation
-
+                directory = create_run(directory, args.output_dir)
+                print(f"Папка ролика: {directory}", flush=True)
                 asyncio.run(run_generation(directory, cfg))
                 return 0
+            directory = current_run(directory)
             if args.command == "voice":
                 return run_voice(directory, args.script, args.output)
             if args.command == "images":
@@ -65,13 +80,15 @@ def main(argv: list[str] | None = None) -> int:
 
                 asyncio.run(generate_images(project_path(directory, args.prompts), project_path(directory, args.output_dir)))
                 return 0
+        directory = current_run(directory)
         if args.command == "montage":
             from .montage import render
 
             output = project_path(directory, args.output)
             render(project_path(directory, args.images), project_path(directory, args.audio), output,
                    timeline=project_path(directory, args.timeline) if args.timeline is not None else None,
-                   subtitles=args.subtitles)
+                   subtitles=args.subtitles,
+                   music=args.music.expanduser().resolve() if args.music is not None else None)
             print(f"Видео сохранено: {output}")
             return 0
         if args.command == "align":

@@ -51,7 +51,7 @@ def split_frames(duration: float, scenes: int) -> list[int]:
 
 
 def render(images_directory: Path, audio: Path, output: Path, *,
-           timeline: Path | None = None, subtitles: bool = True) -> None:
+           timeline: Path | None = None, subtitles: bool = True, music: Path | None = None) -> None:
     if output.suffix.lower() != ".mp4":
         raise ValueError("Выходной файл должен иметь расширение .mp4")
     try:
@@ -64,6 +64,9 @@ def render(images_directory: Path, audio: Path, output: Path, *,
     images = read_images(images_directory)
     audio = audio.absolute()
     duration = audio_duration(audio, binary=probe)
+    if music is not None:
+        music = music.expanduser().resolve()
+        audio_duration(music, binary=probe)
     timing = None
     if timeline is not None:
         timing, frames = read_timeline(timeline, audio, duration, len(images))
@@ -91,7 +94,7 @@ def render(images_directory: Path, audio: Path, output: Path, *,
         list_path = work / "scenes.txt"
         list_path.write_text("".join(listing), encoding="utf-8")
         final = work / "final.mp4"
-        mux(encoder, list_path, audio, duration, final, subtitles=burn_subtitles)
+        mux(encoder, list_path, audio, duration, final, subtitles=burn_subtitles, music=music)
         if timing is not None and file_hash(audio) != timing["audio_sha256"]:
             raise ValueError("Озвучка изменилась во время монтажа; пересоздайте тайминги")
         # На одной файловой системе: публикация целиком, без перезаписи даже при гонке.

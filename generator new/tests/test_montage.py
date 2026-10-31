@@ -142,12 +142,13 @@ class MontageTests(unittest.TestCase):
                  directory / "кадры", directory / "absolute.wav", directory / "nested/out.MP4")):
                 with patch("shorts_ai.montage.render") as renderer, redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
                     self.assertEqual(main(["--project-dir", str(directory), "montage", *extra]), 0)
-                    renderer.assert_called_once_with(image, audio, output, timeline=None, subtitles="--no-subtitles" not in extra)
+                    renderer.assert_called_once_with(image, audio, output, timeline=None,
+                                                     subtitles="--no-subtitles" not in extra, music=None)
             stderr = io.StringIO()
             with patch("shorts_ai.montage.render") as renderer, redirect_stderr(stderr), redirect_stdout(io.StringIO()):
                 self.assertEqual(main(["--project-dir", str(directory), "montage", "--timeline", "timeline.json"]), 0)
                 renderer.assert_called_once_with(directory / "images", directory / "voice.mp3", directory / "final.mp4",
-                                                 timeline=directory / "timeline.json", subtitles=True)
+                                                 timeline=directory / "timeline.json", subtitles=True, music=None)
 
 
 class FFmpegIntegrationTests(unittest.TestCase):

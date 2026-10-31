@@ -170,13 +170,13 @@ class GenerationCLITests(unittest.TestCase):
                     stdout, stderr = io.StringIO(), io.StringIO()
                     with patch.dict(os.environ, env, clear=True), redirect_stdout(stdout), redirect_stderr(stderr):
                         with patch("shorts_ai.generation.create_client", side_effect=client):
-                            code = main(["--project-dir", str(root), "generate"])
+                            code = main(["--project-dir", str(root), "generate", "--output-dir", str(root / "output")])
                     self.assertEqual((code, stderr.getvalue()), (0, ""))
                     self.assertEqual(calls.count("api.fish.audio"), int(voice))
                     self.assertEqual(calls.count("api.openai.com"), int(images))
                     self.assertEqual(len(clients), int(voice) + int(images))
-                    self.assertEqual((root / "voice.mp3").exists(), voice)
-                    self.assertEqual((root / "images/01.png").exists(), images)
+                    self.assertEqual((root / "output/voice.mp3").exists(), voice)
+                    self.assertEqual((root / "output/images/01.png").exists(), images)
 
     def test_images_command_ignores_flags_and_supports_other_paths(self):
         with tempfile.TemporaryDirectory() as temporary:

@@ -40,6 +40,15 @@ class PromptTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "UTF-8"):
                 read_prompts(path)
 
+    def test_title_line_is_rejected_before_first_marker(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "prompts.txt"
+            path.write_text("\ufeffПочему шины чёрные\r\n\r\n[01]\r\nFirst.\r\n[02]\r\nSecond.", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "начинаться с маркера"):
+                read_prompts(path)
+            path.write_text("[01]\nFirst.")
+            self.assertEqual(read_prompts(path), [Prompt(1, "First.")])
+
     def test_limit_counts_unicode_characters_not_bytes(self):
         with tempfile.TemporaryDirectory() as temporary:
             path = Path(temporary) / "prompts.txt"

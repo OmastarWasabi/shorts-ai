@@ -2,6 +2,7 @@
 
 import os
 from pathlib import Path
+import shutil
 import tempfile
 
 
@@ -24,6 +25,22 @@ def read_utf8(path: Path) -> str:
         return path.read_bytes().decode("utf-8-sig")
     except UnicodeDecodeError:
         raise ValueError(f"{path.name} должен быть в кодировке UTF-8") from None
+
+
+def create_run(directory: Path, output: Path) -> Path:
+    run = output.expanduser().resolve()
+    run.mkdir(parents=True, exist_ok=True)
+    for filename in ("story.txt", "prompts.txt", "scenes.json"):
+        source = directory / filename
+        if source.exists() and source != run / filename:
+            shutil.copy2(source, run / filename)
+    (directory / ".current_run").write_text(str(run), encoding="utf-8")
+    return run
+
+
+def current_run(directory: Path) -> Path:
+    pointer = directory / ".current_run"
+    return directory / read_utf8(pointer).strip() if pointer.exists() else directory
 
 
 def write_bytes_atomic(path: Path, data: bytes, *, overwrite: bool = False) -> None:

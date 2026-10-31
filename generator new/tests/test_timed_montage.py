@@ -112,7 +112,7 @@ class TimedMontageTests(unittest.TestCase):
                 code = main(["--project-dir", str(root), "montage", "--timeline", str(timeline), "--no-subtitles"])
             self.assertEqual(code, 0)
             renderer.assert_called_once_with(root / "images", root / "voice.mp3", root / "final.mp4",
-                                             timeline=timeline, subtitles=False)
+                                             timeline=timeline, subtitles=False, music=None)
 
 
 class TimedRenderIntegrationTests(unittest.TestCase):

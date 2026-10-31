@@ -13,10 +13,30 @@ from shorts_ai.cli import main
 
 class CLITests(unittest.TestCase):
     def call_main(self, directory, *arguments, env=None):
+        if arguments[0] == "generate":
+            arguments = (*arguments, "--output-dir", str(directory))
         stdout, stderr = io.StringIO(), io.StringIO()
         with patch.dict(os.environ, env or {}, clear=True), redirect_stdout(stdout), redirect_stderr(stderr):
             code = main(["--project-dir", str(directory), *arguments])
         return code, stdout.getvalue(), stderr.getvalue()
+
+    def test_run_reads_env_and_starts_pipeline(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            (directory / ".env").write_text("GENERATE_VOICE=false\nGENERATE_IMAGES=true\n")
+            with patch("shorts_ai.pipeline.run_pipeline", return_value=directory / "final.mp4") as pipeline:
+                code, stdout, stderr = self.call_main(directory, "run")
+                self.assertEqual((code, stderr), (0, ""))
+                self.assertIn("Готовый ролик:", stdout)
+                self.assertEqual(pipeline.call_args.args[0], directory.resolve())
+                self.assertFalse(pipeline.call_args.args[1].generate_voice)
+                self.assertTrue(pipeline.call_args.args[1].generate_images)
+                (directory / ".env").write_text("BROKEN LINE\n", encoding="utf-8")
+                code, _, stderr = self.call_main(directory, "run")
+                self.assertEqual(code, 1)
+                self.assertIn("строке 1", stderr)
+                self.assertNotIn("BROKEN LINE", stderr)
+                self.assertEqual(pipeline.call_count, 1)
 
     def test_disabled_generators_need_no_files_keys_or_client(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -105,7 +125,7 @@ class CLITests(unittest.TestCase):
             env = os.environ.copy()
             env.update(GENERATE_VOICE="false", GENERATE_IMAGES="false")
             for command in ([sys.executable, "-m", "shorts_ai"], [str(Path(sys.executable).parent / "shorts-ai")]):
-                result = subprocess.run([*command, "generate"], cwd=directory, env=env, capture_output=True, text=True, timeout=10)
+                result = subprocess.run([*command, "generate", "--output-dir", "output"], cwd=directory, env=env, capture_output=True, text=True, timeout=10)
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertIn("Все генерации отключены", result.stdout)
             result = subprocess.run(
@@ -129,7 +149,7 @@ sys.exit(main(sys.argv[1:]))
         with tempfile.TemporaryDirectory() as temporary:
             env = os.environ.copy()
             env.update(GENERATE_VOICE="false", GENERATE_IMAGES="false")
-            for arguments in (["--help"], ["--version"], ["montage", "--help"], ["--project-dir", temporary, "generate"]):
+            for arguments in (["--help"], ["--version"], ["run", "--help"], ["montage", "--help"], ["--project-dir", temporary, "generate", "--output-dir", temporary]):
                 with self.subTest(arguments=arguments):
                     result = subprocess.run([sys.executable, "-c", script, *arguments], env=env, capture_output=True, text=True, timeout=10)
                     self.assertEqual(result.returncode, 0, result.stderr)
